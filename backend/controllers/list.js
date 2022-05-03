@@ -1,12 +1,15 @@
 const List = require("../models/List");
 const listRouter = require("express").Router();
 
-listRouter.get("", async (req, res) => {
+listRouter.get("", async (req, res, next) => {
   const root = req.query.root;
-  const url = new URL(link);
-  const result = await List.find({ root: url });
-
-  return res.json(result);
+  try {
+    const newURL = new URL(root);
+    const result = await List.find({ root: newURL.hostname });
+    return res.json(result);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = listRouter;
