@@ -1,16 +1,16 @@
-import normalizeUrl from "normalize-url";
-
 import useSWRWithParams from "../swr/useSWRWithParams";
-
+import { normalizeURL } from "../utils/urlUtils";
 const URL = process.env.REACT_APP_SERVER_URL + "list/";
 
 const useLists = (root) => {
-  console.log(URL);
+  const url = normalizeURL(root);
   const { data, error } = useSWRWithParams(
-    root.trim().length > 0 ? URL : null,
-    {
-      root: root.trim().length > 0 ? normalizeUrl(root) : null,
-    }
+    URL,
+    url
+      ? {
+          root: url,
+        }
+      : null
   );
   return {
     lists: data,
@@ -18,5 +18,4 @@ const useLists = (root) => {
     isError: error,
   };
 };
-
 export default useLists;

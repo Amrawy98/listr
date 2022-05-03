@@ -10,7 +10,10 @@ const fetchWithParams = (url, params) =>
     .catch((err) => err);
 
 const useSWRWithParams = (url, params) => {
-  const { data, error } = useSWR([url, params], fetchWithParams);
+  const { data, error } = useSWR(
+    [params ? url : null, params],
+    fetchWithParams
+  );
   return {
     data: data,
     error: error,
