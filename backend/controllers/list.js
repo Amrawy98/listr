@@ -12,4 +12,15 @@ listRouter.get("", async (req, res, next) => {
   }
 });
 
+listRouter.post("", async (req, res, next) => {
+  const { name, hostname, description } = req.body;
+  try {
+    console.log(name, hostname);
+    const result = await List.create({ name, hostname, description });
+    return res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = listRouter;

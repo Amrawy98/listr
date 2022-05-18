@@ -7,7 +7,6 @@ const miscRouter = require("./controllers/link");
 const listRouter = require("./controllers/list");
 require("./DBConnect");
 
-
 const app = express();
 app.use(cors()); // cross origin access in front remove one both are on the same domain
 app.use(express.json()); //parsing requests
