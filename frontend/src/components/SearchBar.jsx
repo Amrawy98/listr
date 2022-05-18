@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useLists from "../services/useList";
 
-const SearchBar = ({ setLists }) => {
-  const [query, setQuery] = useState("");
+const SearchBar = ({ setLists, query, setQuery, showListForm }) => {
   const { lists, isLoading, isError } = useLists(query);
 
   const handleChangeLink = (e) => {
-    setQuery(e.target.value);
+    if (!showListForm) setQuery(e.target.value);
   };
   useEffect(() => {
     if (isError) setLists(null);
