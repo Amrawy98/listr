@@ -12,3 +12,5 @@ const useSWRVanilla = (url) => {
   };
 };
 export default useSWRVanilla;
+
+//TODO: this should probably go away
