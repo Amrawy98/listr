@@ -1,9 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
-const logger = require("./utils/logger");
 const middleware = require("./utils/middleware");
-const miscRouter = require("./controllers/link");
+const linkRouter = require("./controllers/link");
 const listRouter = require("./controllers/list");
 require("./DBConnect");
 
@@ -12,7 +11,7 @@ app.use(cors()); // cross origin access in front remove one both are on the same
 app.use(express.json()); //parsing requests
 app.use(middleware.requestLogger); //logging incoming requests
 // routes
-app.use("/api/misc", miscRouter);
+app.use("/api/link/", linkRouter);
 app.use("/api/list/", listRouter);
 
 app.use(middleware.unknownEndpoint); //unknown route

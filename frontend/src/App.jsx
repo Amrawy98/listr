@@ -2,22 +2,15 @@ import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar";
 import ListCard from "./components/ListCard";
 import ListForm from "./components/ListForm";
-import { validateURL } from "./utils/urlUtils";
+import { normalizeURL } from "./utils/urlUtils";
 import { useEffect, useState } from "react";
 const App = () => {
-  // const listData = {
-  //   url: "https://www.google.com/",
-  //   image: "https://i.ytimg.com/vi/U-C0I-Ks14M/maxresdefault.jpg",
-  //   title: "google",
-  //   description: "mammamiaa marcello this is not how hold a query",
-  // };
-
   const [lists, setLists] = useState([]);
   const [showListForm, setShowListForm] = useState(false);
   const [query, setQuery] = useState("");
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(null);
   useEffect(() => {
-    setValid(validateURL(query));
+    setValid(normalizeURL(query));
   }, [query]);
   return (
     <div className="App">
@@ -55,6 +48,7 @@ const App = () => {
           ? lists.map((l) => (
               <ListCard
                 key={l.id}
+                link={valid}
                 listData={l}
                 deleteList={() => console.log("hello")}
                 addToList={() => console.log("hello")}

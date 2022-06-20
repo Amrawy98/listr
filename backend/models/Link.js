@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // indefinitely and for any details to be added in the future ex. (caching)
 
 const linkSchema = new mongoose.Schema({
-  Link: {
+  link: {
     type: String,
     validate: {
       validator: (v) => {
@@ -16,7 +16,7 @@ const linkSchema = new mongoose.Schema({
       message: (props) => "Invalid URL.",
     },
   },
-  List: {
+  list: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "List",
   },

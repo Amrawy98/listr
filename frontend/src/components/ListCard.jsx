@@ -1,6 +1,17 @@
 // import Card from "./Card";
+import linkServices from "../services/link";
 
-const ListCard = ({ listData, addToList, deleteList, getList }) => {
+const ListCard = ({ listData, deleteList, getList, link }) => {
+  const addToList = (link, list) => {
+    linkServices
+      .addLink({
+        link,
+        list,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <button onClick={deleteList}>delete</button>
@@ -10,7 +21,14 @@ const ListCard = ({ listData, addToList, deleteList, getList }) => {
           {listData.description ? <p>{listData.description}</p> : ""}
         </div>
       </a>
-      <button onClick={addToList}>add</button>
+      <button
+        onClick={() => {
+          console.log(link, listData.id);
+          addToList(link, listData.id);
+        }}
+      >
+        add
+      </button>
       <button onClick={getList}>expand</button>
     </div>
   );
